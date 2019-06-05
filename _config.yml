@@ -1,1 +1,4 @@
+permalink: pretty
 exclude: ['LICENSE', 'CNAME', 'README.md']
+plugins:
+  - jekyll-redirect-from

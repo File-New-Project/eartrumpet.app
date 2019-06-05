@@ -1,0 +1,82 @@
+---
+redirect_from:
+  - /jmp/fixfonts
+---
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <title>EarTrumpet - Help - Fix a crash resulting from fonts containing a Mark of the Web</title>
+ </head>
+ <body>
+ <div id="main">
+  <div>
+   <header>
+    <h1>Fix a crash resulting from fonts containing a Mark of the Web</h1>
+    <p>
+    A problem exists in Windows 10, where Desktop Bridge (aka Centennial) applications (like EarTrumpet) will fail to load system fonts (e.g. Segoe UI, Segoe MDL2 Assets) if they contain a Mark of the Web. This could occur, for example, after upgrading from
+    Windows 8.1 where marked fonts were manually installed.
+    </p>
+    <p>
+    More information about the Mark of the Web feature can be found on
+    <a href="https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/ms537628(v=vs.85)">Microsoft Docs</a>.
+    </p>
+   </header>
+   <section>
+    <h2>Symptoms</h2>
+    <ul>
+     <li>App crashes at startup</li>
+     <li>
+      .NET Runtime error events exist in the Application event log with the following exception information:<br />
+      <pre>
+       Application: [application].exe
+       Framework Version: v4.0.30319
+       Description: The process was terminated due to an unhandled exception.
+       Exception Info: System.IO.FileNotFoundException
+       at MS.Internal.Text.TextInterface.Native.Util.ConvertHresultToException
+       <strong>at MS.Internal.Text.TextInterface.FontFamily.GetFirstMatchingFont</strong>
+       ...
+      </pre>
+     </li>
+    </ul>
+   </section>
+   <section>
+    <h2>Resolution (automatic)</h2>
+    <ol>
+     <li>Download the
+     <a href="https://github.com/File-New-Project/TroubleshootingPacks/releases/download/1.0/FixBlockedFonts.diagcab">Blocked Fonts Troubleshooting Pack</a> from File-New-Project.
+     </li>
+     <li>Execute <pre class="inline">FixBlockedFonts.diagcab</pre> to start the troubleshooting wizard.</li>
+     <li>Follow the on-screen prompts.</li>
+     <li>Uninstall and reinstall the affected application to clear its font cache.</li>
+    </ol>
+   </section>
+   <section>
+    <h2>Resolution (manual)</h2>
+    <details>
+     <ol>
+      <li>Open File Explorer and navigate to <pre class="inline">\\localhost\C$\Windows\Fonts</pre>.</li>
+      <li>Find <pre class="inline">segmdl2.ttf</pre>.</li>
+      <li>Open the context menu (e.g. right-click) and select Properties.</li>
+      <li>At the bottom of the window, check Unblock and select the OK button.</li>
+      <li>Repeat steps 2-4 for fonts:
+       <pre class="inline">segoeui.ttf</pre>,
+       <pre class="inline">seguisb.ttf</pre>, and
+       <pre class="inline">segmdl2.ttf</pre>.
+      </li>
+      <li>Repeat steps 1-5 for location: <pre class="inline">%LocalAppData%\Microsoft\Windows\Fonts</pre>.</li>
+      <li>Delete all fonts stored in: <pre class="inline">%LocalAppData%\Packages\[package family name]\LocalCache\Local\Microsoft\Windows\Fonts</pre></li>
+      <li>Uninstall and reinstall the affected application to clear its font cache.</li>
+     </ol>
+    </details>
+   </section>
+   <footer>
+    <span>Last updated: June 3, 2019 · 21060567</span>
+   </footer>
+  </div>
+ </div>
+ </body>
+</html>

@@ -1,0 +1,48 @@
+* {
+  min-width: 0;
+}
+
+html, body {
+  margin: 10px;
+}
+
+header, section {
+  margin-bottom: 50px;
+}
+
+header h1, section h2 {
+  border-bottom: 1px solid #ddd;
+}
+
+section li, section p {
+  line-height: 2em;
+}
+
+footer {
+  font-size: 0.85em;
+  color: gray;
+}
+
+pre.inline {
+  display: inline;
+  padding: 0;
+}
+
+pre {
+  background-color: #f2f2f2;
+  padding: 10px;
+  white-space: pre-line;
+}
+
+#main {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+@media only screen and (min-width : 1024px) {
+  #main {
+    display: flex;
+    width: 60%;
+  }
+}
