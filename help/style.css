@@ -2,7 +2,7 @@
   min-width: 0;
 }
 
-html, body {
+body {
   margin: 10px;
 }
 
@@ -42,7 +42,6 @@ pre {
 
 @media only screen and (min-width : 1024px) {
   #main {
-    display: flex;
     width: 60%;
   }
 }
