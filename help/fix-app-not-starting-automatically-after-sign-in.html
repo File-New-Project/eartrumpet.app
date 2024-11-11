@@ -1,0 +1,76 @@
+---
+redirect_from:
+  - /jmp/fixstartup
+---
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <title>EarTrumpet - Help - Fix packaged applications not starting automatically after sign in</title>
+ </head>
+ <body>
+ <div id="main">
+  <div>
+   <header>
+    <h1>Fix packaged applications not starting automatically after sign in</h1>
+    <p>
+      In Windows 10 and Windows 11, certain packaged applications (such as EarTrumpet) may not start automatically
+      after sign-in if required startup policies are missing. These policies are often improperly removed by
+      ineffective or poorly designed scripts and tools that claim to “debloat” the operating system, fix issues,
+      or enhance privacy—actions that can cause more problems than they solve.
+    </p>
+   </header>
+   
+   <section>
+    <h2>Symptoms</h2>
+    <ul>
+      <li>The application fails to start automatically after sign-in.</li>
+      <li>The application continuously appears as "Disabled" in <strong>Task Manager</strong> > <strong>Startup Apps</strong>.</li>
+      <li>The application cannot be configured to start automatically in <strong>Settings</strong> > <strong>Apps</strong> > <strong>Installed apps</strong> > <strong>[App Name]</strong> because the toggle is disabled.<br/></li>
+      <li>The application cannot be configured to start automatically in <strong>Settings</strong> > <strong>Apps</strong> > <strong>Startup</strong> because the toggle is disabled.<br/></li>
+      <li>The application reports that startup is disabled by Group Policy, even when no such policy exists.</li>
+      <li>The application's built-in setting to manage startup is disabled or grayed out.</li>
+    </ul>
+   </section>
+
+   <section>
+    <h2>Resolution (automatic)</h2>
+    <ol>
+      <li>Download <a href="/help/files/RestoreStartupTaskPolicies.reg">RestoreStartupTaskPolicies.reg</a>.</li>
+      <li>Right-click the downloaded file and select <strong>Merge</strong>.</li>
+      <li>If prompted by <strong>User Account Control</strong>, click <strong>Yes</strong> to allow changes.</li>
+      <li>When asked to confirm adding the information to the registry, click <strong>Yes</strong>.</li>
+    </ol>
+   </section>
+
+   <section>
+    <h2>Resolution (manual)</h2>
+    <details>
+     <ol>
+      <li>Go to <strong>Start</strong>, type <em>Notepad</em>, and select it.</li>
+      <li>Copy the following registry script:
+        <br/>
+        <pre style="white-space-collapse: preserve-breaks;">
+        [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+        "EnableFullTrustStartupTasks"=dword:00000002
+        "EnableUwpStartupTasks"=dword:00000002
+        "SupportFullTrustStartupTasks"=dword:00000001
+        "SupportUwpStartupTasks"=dword:00000001
+        </pre>
+      </li>
+      <li>Paste the script into Notepad. Select <strong>File &gt; Save As</strong>, set <strong>Save as type</strong> to <strong>All Files</strong>, and name it <em>RestoreStartupTaskPolicies.reg</em>. Select <strong>Save</strong>.</li>
+      <li>Right-click the saved file and select <strong>Merge</strong>. Confirm in the <strong>User Account Control</strong> dialog.</li>
+      <li>When prompted, select <strong>Yes</strong> to confirm adding the keys to the registry, then select <strong>OK</strong> in the confirmation message.</li>
+     </ol>
+    </details>
+   </section>
+   <footer>
+    <span>Last updated: November 11, 2024</span>
+   </footer>
+  </div>
+ </div>
+ </body>
+</html>
